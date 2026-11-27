@@ -2,7 +2,6 @@ package br.com.gof.controller;
 
 import br.com.gof.model.Client;
 import br.com.gof.service.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/clients")
 public class ClientRestController {
+    private final ClientService clientService;
 
-    @Autowired
-    private ClientService clientService;
+    public ClientRestController(ClientService clientService) {
+        this.clientService = clientService;
+    }
 
     @GetMapping
     public ResponseEntity<Iterable<Client>> findAll() {
